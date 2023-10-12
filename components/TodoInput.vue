@@ -34,9 +34,15 @@ export default {
     async createTodo() {
       if (this.newTodo.title.length) {
         this.isLoading = true
+        console.log($nuxt.$route.name);
         let todo = { ...this.newTodo }
         this.newTodo.title = ''
         await this.addTodo(todo)
+        if($nuxt.$route.name === 'index'){
+          this.$router.push({
+            path: `/taskList`
+          });
+        }
         this.isLoading = false
       }
     }

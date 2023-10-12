@@ -10,15 +10,16 @@
             @click="checkTask(taskStatus)"
           />
           <label :for="`checkbox-${todo.id}`" class="todo-content">
-            <!-- <input type="text" v-model="todo.title" /> -->
             <div class="task-content">
               <span>{{ todo.title }}</span>
             </div>
           </label>
           <span class="choice-list__aside">
+            <img v-show="todo.assignee.avatar" :src="todo.assignee.avatar" alt="Italian Trulli" @click="getUsersData" >
+            
             <button
               class="btn task-action-star"
-              @click="load(todoActions.delete, todo)"
+              :style="`color: ${todo.is_important ? 'rgb(255, 185, 35)' : 'none'}`"
             >
               <i class="fa fa-star" aria-hidden="true"></i>
             </button>
@@ -36,6 +37,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import TodoActions from '@/components/TodoActions'
 
 export default {
@@ -48,8 +50,15 @@ export default {
   },
   data() {
     return {
-      taskStatus: false
+      taskStatus: false,
+      userList: [],
     }
+  },
+  computed: {
+    ...mapState(["todos", "users"]),
+  },
+  mounted() {
+    this.$store.dispatch('users/setUsers')
   },
   methods: {
     routeTo(id) {
@@ -57,7 +66,10 @@ export default {
     },
     checkTask(value) {
       return (this.taskStatus = value ? false : true)
-    }
+    },
+    getUsersData(){
+      console.log('users = ', this.users)
+    },
   }
 }
 </script>
@@ -98,5 +110,20 @@ export default {
   align-items: right;
   font-size: 1.4rem;
   width: 10%;
+}
+
+img {
+  border-radius: 50%;
+  height: 18%;
+  width: 18%;
+}
+
+.card {
+  margin-bottom: 32px;
+}
+
+tr.highlighted {
+  background-color: #dff0d8;
+  color: #3c763d;
 }
 </style>

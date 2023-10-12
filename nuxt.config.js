@@ -15,8 +15,8 @@ module.exports = {
       {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.1/css/all.css'
-      }
-    ]
+      },
+    ],
   },
 
   css: ['~/plugins/css/main.css'],
