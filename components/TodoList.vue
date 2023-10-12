@@ -90,10 +90,10 @@ export default {
     }
   },
   watch: {
-      searchTasks() {
-        this.searchDataFilter();
-      }
-    },
+    searchTasks() {
+      this.searchDataFilter();
+    }
+  },
   mounted() {
     this.loading = true;
     this.init();
